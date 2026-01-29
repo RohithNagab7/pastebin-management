@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getPasteAndConsumeView } from "@/services/paste.service"
+import { getPasteAndConsumeView } from "@/services/paste.service";
 import { getNowMs } from "@/lib/time";
 
 type PageProps = {
@@ -9,8 +9,8 @@ type PageProps = {
 };
 
 export default async function PastePage({ params }: PageProps) {
-  const nowMs = getNowMs(); 
-  const {id} = await params;
+  const nowMs = getNowMs();
+  const { id } = await params;
   const result = await getPasteAndConsumeView(id, nowMs);
 
   if (!result) {
@@ -18,9 +18,18 @@ export default async function PastePage({ params }: PageProps) {
   }
 
   return (
-    <main style={{ padding: "2rem", fontFamily: "monospace", whiteSpace: "pre-wrap" }}>
-      <h1>Shared Paste</h1>
-      <pre>{result.content}</pre>
+    <main
+      style={{
+        padding: "2rem",
+        fontFamily: "monospace",
+        whiteSpace: "pre-wrap",
+      }}
+    >
+      <h1 className="text-3xl text-gray-700 mb-5">Shared Paste</h1>
+      <h1 className="text-xl text-gray-600 mb-5">
+        Content: 
+      </h1>
+      <pre className="text-xl text-gray-500 tracking-wide mb-5">{result.content}</pre>
 
       <hr />
 
@@ -30,7 +39,13 @@ export default async function PastePage({ params }: PageProps) {
         )}
 
         {result.expiresAt && (
-          <p>Expires at: {result.expiresAt.toISOString()}</p>
+          <p>
+            Expires on:{" "}
+            {new Date(result.expiresAt).toLocaleString("en-IN", {
+              dateStyle: "medium",
+              timeStyle: "short",
+            })}
+          </p>
         )}
       </div>
     </main>

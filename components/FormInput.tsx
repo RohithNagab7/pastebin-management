@@ -3,7 +3,7 @@ import { FormInputProps } from "@/lib/GlobalUtils";
 export default function FormInput({
   label,
   name,
-  type = "text",
+  type = "number",
   placeholder,
   value,
   onChange,

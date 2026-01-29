@@ -25,7 +25,7 @@ export interface InputFieldDataProps {
 
 export interface FormState {
   content: string;
-  ttl_seconds: string;
+  ttl_minutes: string;
   max_views: string;
 };
 

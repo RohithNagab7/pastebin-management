@@ -2,19 +2,23 @@ import { generatePasteId } from "@/lib/id";
 import { prisma } from "@/lib/prisma";
 import { computeExpiry } from "@/lib/time";
 
-export async function createPaste(content: string, maxViews: number | undefined, ttlSeconds: undefined | number, nowMs: number) {
+export async function createPaste(
+  content: string,
+  maxViews: number | undefined,
+  ttlMinutes: number | undefined,
+  nowMs: number
+) {
   const id = generatePasteId();
 
-  const expiresAt = ttlSeconds
-    ? computeExpiry(ttlSeconds, nowMs)
-    : null;
+  const expiresAt =
+    ttlMinutes != null ? computeExpiry(ttlMinutes, nowMs) : null;
 
   const paste = await prisma.paste.create({
     data: {
       id,
       content,
       expiresAt,
-      maxViews,
+      maxViews: maxViews ?? null,
       viewCount: 0,
     },
   });
@@ -22,10 +26,7 @@ export async function createPaste(content: string, maxViews: number | undefined,
   return paste;
 }
 
-export async function getPasteAndConsumeView(
-  id: string,
-  nowMs: number
-) {
+export async function getPasteAndConsumeView(id: string, nowMs: number) {
   return await prisma.$transaction(async (tx) => {
     const paste = await tx.paste.findUnique({ where: { id } });
 

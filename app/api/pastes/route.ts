@@ -15,10 +15,10 @@ export async function POST(req: Request) {
       );
     }
 
-    const { content, ttl_seconds, max_views } = parsed.data;
+    const { content, ttl_minutes, max_views } = parsed.data;
     const nowMs = getNowMs(req);
 
-    const paste = await createPaste(content, ttl_seconds, max_views, nowMs);
+    const paste = await createPaste(content, max_views, ttl_minutes,  nowMs);
 
     const baseUrl =
       process.env.NEXT_PUBLIC_BASE_URL || req.headers.get("origin");

@@ -11,7 +11,7 @@ type FieldName = keyof HomeStateTypes["formState"];
 const initialState: HomeStateTypes = {
   formState: {
     content: "",
-    ttl_seconds: "",
+    ttl_minutes: "",
     max_views: "",
   },
   error: null,
@@ -52,8 +52,8 @@ function Home() {
     try {
       const payload = {
         content: state.formState.content,
-        ...(state.formState.ttl_seconds && {
-          ttl_seconds: Number(state.formState.ttl_seconds),
+        ...(state.formState.ttl_minutes && {
+          ttl_minutes: Number(state.formState.ttl_minutes),
         }),
         ...(state.formState.max_views && {
           max_views: Number(state.formState.max_views),
@@ -68,7 +68,7 @@ function Home() {
         loading: false,
         formState: {
           content: "",
-          ttl_seconds: "",
+          ttl_minutes: "",
           max_views: "",
         }
       }));

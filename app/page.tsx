@@ -85,8 +85,8 @@ function Home() {
   }
 
   return (
-    <main className="p-12 bg-cyan-950 text-cyan-100 w-screen min-h-screen">
-      <div className="p-6 rounded shadow w-full max-w-xl bg-cyan-950">
+    <main className="p-12 bg-gray-900 text-gray-100 w-screen min-h-screen">
+      <div className="p-6 rounded shadow w-full max-w-xl bg-gray-950">
         <h1 className="text-xl font-semibold mb-4">Create Paste</h1>
 
         {InputFields.map((f) => (
@@ -105,7 +105,7 @@ function Home() {
         <button
           onClick={handleSubmit}
           disabled={state.loading}
-          className="bg-cyan-600 text-white px-4 py-2 rounded hover:bg-cyan-700 disabled:opacity-50"
+          className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 disabled:opacity-50"
         >
           {state.loading ? "Creating..." : "Create Paste"}
         </button>
@@ -115,7 +115,7 @@ function Home() {
             <p className="text-sm">Shareable Link:</p>
             <a
               href={state.link}
-              className="text-blue-400 underline"
+              className="text-gray-400 underline"
               target="_blank"
               rel="noopener noreferrer"
             >

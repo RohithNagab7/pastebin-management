@@ -2,7 +2,7 @@ import { generatePasteId } from "@/lib/id";
 import { prisma } from "@/lib/prisma";
 import { computeExpiry } from "@/lib/time";
 
-export async function createPaste(content: string, maxViews: number | undefined, ttlSeconds: undefined, nowMs: number) {
+export async function createPaste(content: string, maxViews: number | undefined, ttlSeconds: undefined | number, nowMs: number) {
   const id = generatePasteId();
 
   const expiresAt = ttlSeconds

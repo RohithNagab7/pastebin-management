@@ -72,13 +72,16 @@ function Home() {
           max_views: "",
         }
       }));
-    } catch (err: any) {
-      setState((prev) => ({
-        ...prev,
-        error: err.message || "Failed to create paste",
-        loading: false,
-      }));
-    }
+    } catch (err: unknown) {
+  const message =
+    err instanceof Error ? err.message : "Failed to create paste";
+
+  setState((prev) => ({
+    ...prev,
+    error: message,
+    loading: false,
+  }));
+}
   }
 
   return (

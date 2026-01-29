@@ -5,13 +5,13 @@ import { computeExpiry } from "@/lib/time";
 export async function createPaste(
   content: string,
   maxViews: number | undefined,
-  ttlMinutes: number | undefined,
+  ttlSeconds: number | undefined,
   nowMs: number
 ) {
   const id = generatePasteId();
 
   const expiresAt =
-    ttlMinutes != null ? computeExpiry(ttlMinutes, nowMs) : null;
+    ttlSeconds != null ? computeExpiry(ttlSeconds, nowMs) : null;
 
   const paste = await prisma.paste.create({
     data: {

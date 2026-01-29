@@ -9,6 +9,6 @@ export function getNowMs(req?: Request): number {
   return Date.now();
 }
 
-export function computeExpiry(ttlMinutes: number, nowMs: number): Date {
-  return new Date(nowMs + ttlMinutes * 60 * 1000);
+export function computeExpiry(ttlSeconds: number, nowMs: number): Date {
+  return new Date(nowMs + ttlSeconds * 1000);
 }
